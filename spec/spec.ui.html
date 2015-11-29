@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="mocha"></div>
+
+    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+    <script src="../src/elasticity.js"></script>
+    <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.3.0/chai.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="spec.ui.js"></script>
+    <script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+    </script>
+
+    <style>
+        .block { border: solid 1px #999; width: 150px; margin-left: 5px; margin-right: 5px; margin-top: 0px; margin-bottom: 10px; padding: 10px; }
+    </style>
+    
+    <div id="testControl" style="margin: 20px;">
+        <div class="block" data-block="true">1.) The quick brown fox</div>
+        <div class="block" data-block="true">2.) The quick brown fox jumped over</div>
+        <div class="block" data-block="true">3.) The quick</div>
+        <div class="block" data-block="true">4.) The quick brown</div>
+        <div class="block" data-block="true">5.) The quick brown fox jumped over the lazy dog</div>
+        <div class="block" data-block="true">6.) The quick brown fox jumped over the</div>
+        <div class="block" data-block="true">7.) Elasticity is a friendly control</div>
+        <div class="block" data-block="true">8.) Mentiond is a great site to share referrals</div>
+        <div class="block" data-block="true">9.) Hello World!</div>
+        <div class="block" data-block="true">10.) There is no place like home</div>
+        <div class="block" data-block="true">11.) I'll make him an offer he can't refuse</div>
+        <div class="block" data-block="true">12.) We elves stick to four main food groups</div>
+    </div>
+</body>
+</html>

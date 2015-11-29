@@ -10,10 +10,12 @@
   $.fn.elasticity = function (options) {
     this.name = "ElasticityControlV1";
     this.columnsDomIdPrefix = "smartLayoutElasticityColumn";
+    this.blocks = [];
+    this.columns = [];
+    
     this._firstStopWidth = true;
     
     this._init = function () { 
-      
       // when window resizes we want to re-evaluate cards
       $(window).bind("resize." + this.id, {
         instance: this
@@ -26,7 +28,7 @@
       data: {instance: this}};
       this._layoutCards(e);
     }
-          
+    
     this.getwidth = function () {
       return this._width;
     };
@@ -62,7 +64,7 @@
     this._buildBoardColumns = function () {
       var instance = this;
       for(var col = 1; col <= this._numberOfColumns; col++) {
-        if($("#" + this.columnsDomIdPrefix + col.toString()).length <= 0) {
+        if(!instance.columns[col-1]) {
           var column = $("<div id=\"" + instance.columnsDomIdPrefix + col.toString() + "\"></div>").css({
               display: "inline-block",
               position: "relative",
@@ -70,28 +72,34 @@
               top: "0px",
           });
           this.append(column);
+          instance.columns.push(column);
         }
       }
     };
         
     this._setCardPositions = function () {
       var instance = this;
-      //var domCards = $("#" + this.id +  " [data-card='true']");
-      var domCards = this.find("[data-card='true']");
-      if(!domCards) return;
+      instance.blocks = 
+        (instance.blocks.length == 0) ? this.find("[data-block='true']") : 
+        instance.blocks;
+      if(!instance.blocks) return;
       
       var colCount = 0;
-      domCards.each(function(index, element){
+      instance.blocks.each(function(index, element){
           colCount++;
-          var col = instance.find("#" + instance.columnsDomIdPrefix + colCount);
+          var col = instance.columns[colCount-1];
           $( this ).appendTo(col);
           if(colCount == instance._numberOfColumns) colCount = 0;
       });
     };
         
     this.clear = function () {
-      var domCards = this.find("[data-card='true']");
-      domCards.each(function (index) {
+      var instance = this;
+      instance.blocks = 
+        (instance.blocks.length == 0) ? this.find("[data-block='true']") : 
+        instance.blocks;
+        
+      instance.blocks.each(function (index) {
           $(this).remove();
       });
     };
