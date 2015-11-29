@@ -1,5 +1,5 @@
 /*!
-* Tally Input Control v1.0 (jQuery Plugin)
+* Elasticity Responsive View Control v1.0 (jQuery Plugin)
 * (c) Asylum Hill Software, LLC
 * License: MIT (http://www.opensource.org/licenses/mit-license.php)
 */
@@ -95,7 +95,14 @@
           $(this).remove();
       });
     };
-        
+    
+    this.forceRestretch = function () {
+      var e = {target: $(window),
+      data: {instance: this},
+      force: true};
+      this._layoutCards(e);
+    }
+    
     this._layoutCards = function (e) {
       var windowWidth = $(e.target).width();
       var instance = e.data.instance;
@@ -107,7 +114,7 @@
       else
         instance._firstStopWidth = true;
         
-      if(!instance._setBoardWidth.call(instance, windowWidth)) return;
+      if(!instance._setBoardWidth.call(instance, windowWidth) || e.force) return;
       instance._buildBoardColumns.apply(instance);
       instance._setCardPositions.apply(instance);
     };
