@@ -1,5 +1,5 @@
 /*!
-* Tally Input Control v1.0 (jQuery Plugin)
+* Elasticity Responsive View Control v1.0 (jQuery Plugin)
 * (c) Asylum Hill Software, LLC
 * License: MIT (http://www.opensource.org/licenses/mit-license.php)
 */
