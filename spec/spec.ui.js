@@ -1,9 +1,9 @@
 // JavaScript source code
 var assert = chai.assert;
+var elasticity = null;
 
 describe('ElasticityUI', function () {
-    var elasticity = null;
-
+    
     beforeEach(function () {
         elasticity = new $('#testControl').elasticity({
         blockWidth: 170,
@@ -20,3 +20,11 @@ describe('ElasticityUI', function () {
     it('UI Testing Placeholder', function () {
     });
 });
+
+var counter = 12;
+function addBlock() {
+  counter++;
+  var block = $("<div class=\"block\" data-block=\"true\">" + counter + ".) Dyanmic New Item</div>");
+  block.insertBefore($('#testControl').children()[0]);
+  elasticity.forceRestretch();
+}

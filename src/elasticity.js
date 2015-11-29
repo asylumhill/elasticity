@@ -88,6 +88,7 @@
       instance.blocks.each(function(index, element){
           colCount++;
           var col = instance.columns[colCount-1];
+          $( this ).attr( "data-stretched", true );
           $( this ).appendTo(col);
           if(colCount == instance._numberOfColumns) colCount = 0;
       });
@@ -105,6 +106,10 @@
     };
     
     this.forceRestretch = function () {
+      var newBlocks = this.find("[data-block='true']:not([data-stretched])");
+      
+      Array.prototype.push.apply(this.blocks, newBlocks);
+      
       var e = {target: $(window),
       data: {instance: this},
       force: true};
