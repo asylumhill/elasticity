@@ -1,5 +1,5 @@
 /*!
-* Elasticity Responsive View Control v1.0 (jQuery Plugin)
+* Tally Input Control v1.0 (jQuery Plugin)
 * (c) Asylum Hill Software, LLC
 * License: MIT (http://www.opensource.org/licenses/mit-license.php)
 */
@@ -114,7 +114,7 @@
       else
         instance._firstStopWidth = true;
         
-      if(!instance._setBoardWidth.call(instance, windowWidth) || e.force) return;
+      if(!instance._setBoardWidth.call(instance, windowWidth) && !e.force) return;
       instance._buildBoardColumns.apply(instance);
       instance._setCardPositions.apply(instance);
     };
