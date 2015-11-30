@@ -33,6 +33,12 @@
       return this._width;
     };
     
+    this.dispose = function() {
+      this._clearColumns();
+      this.blocks = [];
+      this.columns = [];
+    };
+    
     this._calculateBoardWidth = function (windowWidth) {
       var boardWidth;
       this._numberOfColumns = Math.floor((windowWidth - settings.leftOffset) / (settings.blockWidth + settings.triggerOffset));
@@ -65,7 +71,7 @@
       var instance = this;
       for(var col = 1; col <= this._numberOfColumns; col++) {
         if(!instance.columns[col-1]) {
-          var column = $("<div id=\"" + instance.columnsDomIdPrefix + col.toString() + "\"></div>").css({
+          var column = $("<div data-column='true' id=\"" + instance.columnsDomIdPrefix + col.toString() + "\"></div>").css({
               display: "inline-block",
               position: "relative",
               float: "left",
@@ -85,24 +91,35 @@
       if(!instance.blocks) return;
       
       var colCount = 0;
-      instance.blocks.each(function(index, element){
-          colCount++;
-          var col = instance.columns[colCount-1];
-          $( this ).attr( "data-stretched", true );
-          $( this ).appendTo(col);
-          if(colCount == instance._numberOfColumns) colCount = 0;
+      $.each(instance.blocks, function( index, block ) {
+        colCount++;
+        var col = instance.columns[colCount-1];
+        $( block ).attr( "data-stretched", true );
+        $( block ).appendTo(col);
+        if(colCount == instance._numberOfColumns) colCount = 0;
       });
     };
-        
-    this.clear = function () {
+    
+    this._clearColumns = function () {
+      var instance = this;
+      instance.columns = 
+        (instance.columns.length == 0) ? this.find("[data-column='true']") : 
+        instance.columns;
+      
+      for(var i = 0; i <= this.columns.length-1; i++) {
+        instance.columns[i].remove();
+      }
+    };
+    
+    this._clearBlocks = function () {
       var instance = this;
       instance.blocks = 
         (instance.blocks.length == 0) ? this.find("[data-block='true']") : 
         instance.blocks;
         
-      instance.blocks.each(function (index) {
-          $(this).remove();
-      });
+      for(var i = 0; i <= this.block.length-1; i++) {
+        instance.blocks[i].remove();
+      }
     };
     
     this.forceRestretch = function () {

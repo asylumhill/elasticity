@@ -24,7 +24,18 @@ describe('ElasticityUI', function () {
 var counter = 12;
 function addBlock() {
   counter++;
-  var block = $("<div class=\"block\" data-block=\"true\">" + counter + ".) Dyanmic New Item</div>");
-  block.insertBefore($('#testControl').children()[0]);
+  
+  var block = $("<div class=\"block\" data-block='true'>" + counter + ".) Dyanmic New Item</div>");
+  if (parseInt(counter) > 1) {
+    block.insertBefore($('#testControl').children()[0]);
+  }
+  else {
+    $('#testControl').append(block);
+  }
   elasticity.forceRestretch();
+}
+
+function clearEverything() {
+  elasticity.dispose();
+  counter = 0;
 }
