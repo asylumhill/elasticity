@@ -40,8 +40,10 @@
       this.columns = [];
     };
     
-    this._withinStopRange = function(windowWidth) {
-      return (windowWidth <= settings.stopWidth);
+    // make sure to use media queries here
+    this._withinStopRange = function() {
+      if (!window) throw "No window object found.";
+       return (window.matchMedia('(max-width: ' + settings.stopWidth.toString() + 'px)').matches);
     }
     
     this._setAndReturnNumberOfColumns = function(windowWidth) {
@@ -63,6 +65,7 @@
     // of this control can accomidate the number of columns (avoids wrapping)
     // The other thing it does it let the caller know if new columns were added 
     // or removed by returning a boolean
+    // TODO: Refactor to use media queries
     this._setBoardWidth = function (windowWidth) {
       var instance = this;
       var cols = this._setAndReturnNumberOfColumns(windowWidth);
@@ -105,6 +108,7 @@
     this._setStoppedBlockPositions = function() {
         console.log("Clear Blocks");
         this._clearColumnsKeepBlocks.call(this);
+        this._width = 0;
     }
     
     // this method inserts and applies blocks position of block
@@ -184,7 +188,6 @@
       var instance = this;
       
       if (!instance.blocks || (instance.blocks.length == 0))
-        // add all available blocks
         instance.blocks = this.find("[data-block='true']");
       else {
         // just add new blocks
@@ -206,7 +209,8 @@
       var windowWidth = $(e.target).width();
       var instance = e.data.instance;
       
-      var continueStop = instance._withinStopRange(windowWidth);
+      var continueStop = instance._withinStopRange();
+      console.log("stopping", continueStop);
       
       if (instance._stopped && continueStop) {
         return;

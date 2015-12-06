@@ -9,7 +9,7 @@ describe('ElasticityUI', function () {
         blockWidth: 170,
         leftOffset: 0,
         triggerOffset: 40,
-        stopWidth: 450,
+        stopWidth: 767,
         minColumns: 1,
         linkWithDomIds: []});
     });
