@@ -34,7 +34,6 @@
     };
     
     this.dispose = function() {
-      this._clearColumnsKeepBlocks();
       this._clearColumns();
       this.blocks = [];
       this.columns = [];
