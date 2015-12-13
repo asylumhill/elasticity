@@ -1,0 +1,32 @@
+{
+  "name": "jquery-elasticity",
+  "version": "1.0.0",
+  "description": "jQuery UI plugin that exands a board of blocks/divs into a responsive columns.",
+  "main": "src/elasticity,js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asylumhill/elasticity.git"
+  },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "responsive",
+    "pinterest",
+    "control",
+    "blocks",
+    "boxes",
+    "expand",
+    "fluid",
+    "resize",
+    "columns"
+  ],
+  "author": "Asylum Hill Software, LLC.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asylumhill/elasticity/issues"
+  },
+  "homepage": "https://github.com/asylumhill/elasticity#readme"
+}
